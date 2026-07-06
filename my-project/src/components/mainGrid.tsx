@@ -11,6 +11,8 @@ const fileToBase64 = (file: File): Promise<string> => {
     });
 };
 
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || "http://127.0.0.1:8000";
+
 const Grid: React.FC = () => {
     const [photo1, setPhoto1] = useState<File | null>(null);
     const [preview1, setPreview1] = useState<string | null>(null);
@@ -59,7 +61,7 @@ const Grid: React.FC = () => {
             formData.append("style_image", photo1);
             formData.append("content_image", photo2);
 
-            const uploadResponse = await fetch("http://127.0.0.1:8000/upload", {
+            const uploadResponse = await fetch(`${API_BASE_URL}/upload`, {
                 method: "POST",
                 body: formData,
             });
@@ -75,7 +77,7 @@ const Grid: React.FC = () => {
             const processForm = new FormData();
             processForm.append("session_id", session_id);
 
-            const processResponse = await fetch("http://127.0.0.1:8000/process", {
+            const processResponse = await fetch(`${API_BASE_URL}/process`, {
                 method: "POST",
                 body: processForm,
             });
