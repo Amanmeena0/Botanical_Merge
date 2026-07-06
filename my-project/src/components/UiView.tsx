@@ -5,23 +5,23 @@ import { Logo } from "./Logo";
 export function Navbar() {
   return (
     <header className="bg-surface/90 backdrop-blur-md border-b border-outline-variant/10 shadow-sm shadow-secondary/5 docked full-width top-0 sticky z-50">
-      <div className="flex justify-between items-center w-full px-gutter h-28 max-w-container-max mx-auto">
-        <Link to="/" className="flex items-center gap-3 hover:scale-105 transition-transform duration-300 py-2">
-          <Logo size={48} className="rounded-xl shadow-sm" />
-          <span className="font-headline-lg text-headline-lg text-primary tracking-tighter">Botanical Merge</span>
+      <div className="flex justify-between items-center w-full px-gutter h-16 max-w-container-max mx-auto">
+        <Link to="/" className="flex items-center gap-3 hover:scale-105 transition-transform duration-300 py-1">
+          <Logo size={36} className="rounded-lg shadow-sm" />
+          <span className="font-headline-sm text-primary tracking-tight">Botanical Merge</span>
         </Link>
-          <nav className="hidden md:flex items-center gap-lg">
-            <Link to="/studio" className="font-label-md text-label-md text-on-surface-variant hover:text-primary transition-colors duration-300">Studio</Link>
-            <a className="font-label-md text-label-md text-on-surface-variant hover:text-primary transition-colors duration-300" href="#">Gallery</a>
-            <a className="font-label-md text-label-md text-on-surface-variant hover:text-primary transition-colors duration-300" href="#">Resources</a>
-          </nav>
+        <nav className="hidden md:flex items-center gap-md">
+          <Link to="/studio" className="font-label-md text-label-md text-on-surface-variant hover:text-primary transition-colors duration-300">Studio</Link>
+          <Link to="/gallery" className="font-label-md text-label-md text-on-surface-variant hover:text-primary transition-colors duration-300">Gallery</Link>
+          <Link to="/resources" className="font-label-md text-label-md text-on-surface-variant hover:text-primary transition-colors duration-300">Resources</Link>
+        </nav>
         
         <div className="flex items-center gap-md">
           <Clerk.SignedOut>
-            <Link to="/signin" className="font-label-md text-label-md text-on-surface-variant hover:text-primary transition-colors duration-300 px-md py-sm">
+            <Link to="/signin" className="font-label-md text-label-md text-on-surface-variant hover:text-primary transition-colors duration-300 px-md py-2">
               Sign In
             </Link>
-            <Link to="/signup" className="px-md py-sm bg-primary text-on-primary font-label-md text-label-md rounded-lg hover:bg-primary-container transition-all active:scale-95 shadow-lg shadow-primary/10">
+            <Link to="/signup" className="px-5 py-2 bg-primary text-on-primary font-label-md text-label-md rounded-lg hover:bg-primary-container transition-all active:scale-95 shadow-lg shadow-primary/10">
               Sign Up
             </Link>
           </Clerk.SignedOut>

@@ -1,5 +1,15 @@
 import React, { useState } from "react";
 import type { ChangeEvent } from "react";
+import { saveMergeItem } from "@/lib/db";
+
+const fileToBase64 = (file: File): Promise<string> => {
+    return new Promise((resolve, reject) => {
+        const reader = new FileReader();
+        reader.readAsDataURL(file);
+        reader.onload = () => resolve(reader.result as string);
+        reader.onerror = (error) => reject(error);
+    });
+};
 
 const Grid: React.FC = () => {
     const [photo1, setPhoto1] = useState<File | null>(null);
@@ -78,8 +88,21 @@ const Grid: React.FC = () => {
             const { result_base64 } = await processResponse.json();
 
             if (result_base64) {
-                setMergedImage(`data:image/png;base64,${result_base64}`);
-                setMessage("✅ Style transfer completed!");
+                const resultDataUrl = `data:image/png;base64,${result_base64}`;
+                setMergedImage(resultDataUrl);
+                
+
+                try {
+                    const img1Base64 = await fileToBase64(photo1);
+                    const img2Base64 = await fileToBase64(photo2);
+                    await saveMergeItem({
+                        image1: img1Base64,
+                        image2: img2Base64,
+                        result: resultDataUrl,
+                    });
+                } catch (saveErr) {
+                    console.error("Failed to save merge to history:", saveErr);
+                }
             } else {
                 setMessage("❌ No result image in response");
             }
@@ -104,15 +127,15 @@ const Grid: React.FC = () => {
             {/* Input Zone */}
             <div className="lg:col-span-5 flex flex-col gap-md">
                 <div className="flex flex-col gap-base">
-                    <span className="font-label-sm text-label-sm uppercase text-outline tracking-widest px-xs">Canvas Alpha</span>
-                    <label className="group relative aspect-4/3 bg-surface-container-low border-2 border-dashed border-outline-variant rounded-xl flex flex-col items-center justify-center cursor-pointer hover:border-primary/40 hover:bg-surface-container transition-all duration-300 shadow-sm overflow-hidden">
+                    <span className="font-label-sm text-label-sm uppercase text-primary font-bold tracking-widest px-xs">Canvas Style</span>
+                    <label className="group relative aspect-4/3 bg-surface-container-low border-2 border-dashed border-outline rounded-xl flex flex-col items-center justify-center cursor-pointer hover:border-primary hover:bg-surface-container transition-all duration-300 shadow-sm overflow-hidden">
                         {preview1 ? (
                             <img src={preview1} alt="Canvas Alpha" className="w-full h-full object-cover animate-fadeIn" />
                         ) : (
                             <>
-                                <span className="material-symbols-outlined text-outline group-hover:text-primary transition-colors mb-sm" style={{ fontSize: "48px" }}>filter_vintage</span>
-                                <p className="font-label-md text-label-md text-on-surface-variant">Image 1</p>
-                                <p className="font-label-sm text-label-sm text-outline">Drop or Click to Upload</p>
+                                <span className="material-symbols-outlined text-on-surface-variant/80 group-hover:text-primary transition-colors mb-sm" style={{ fontSize: "48px" }}>filter_vintage</span>
+                                <p className="font-label-md text-label-md text-on-surface font-semibold">Image 1</p>
+                                <p className="font-label-sm text-label-sm text-on-surface-variant">Drop or Click to Upload</p>
                             </>
                         )}
                         <input type="file" accept="image/*" onChange={handlePhoto1Change} className="hidden" />
@@ -120,15 +143,15 @@ const Grid: React.FC = () => {
                 </div>
 
                 <div className="flex flex-col gap-base">
-                    <span className="font-label-sm text-label-sm uppercase text-outline tracking-widest px-xs">Canvas Beta</span>
-                    <label className="group relative aspect-4/3 bg-surface-container-low border-2 border-dashed border-outline-variant rounded-xl flex flex-col items-center justify-center cursor-pointer hover:border-primary/40 hover:bg-surface-container transition-all duration-300 shadow-sm overflow-hidden">
+                    <span className="font-label-sm text-label-sm uppercase text-primary font-bold tracking-widest px-xs">Canvas Content</span>
+                    <label className="group relative aspect-4/3 bg-surface-container-low border-2 border-dashed border-outline rounded-xl flex flex-col items-center justify-center cursor-pointer hover:border-primary hover:bg-surface-container transition-all duration-300 shadow-sm overflow-hidden">
                         {preview2 ? (
                             <img src={preview2} alt="Canvas Beta" className="w-full h-full object-cover animate-fadeIn" />
                         ) : (
                             <>
-                                <span className="material-symbols-outlined text-outline group-hover:text-primary transition-colors mb-sm" style={{ fontSize: "48px" }}>potted_plant</span>
-                                <p className="font-label-md text-label-md text-on-surface-variant">Image 2</p>
-                                <p className="font-label-sm text-label-sm text-outline">Drop or Click to Upload</p>
+                                <span className="material-symbols-outlined text-on-surface-variant/80 group-hover:text-primary transition-colors mb-sm" style={{ fontSize: "48px" }}>potted_plant</span>
+                                <p className="font-label-md text-label-md text-on-surface font-semibold">Image 2</p>
+                                <p className="font-label-sm text-label-sm text-on-surface-variant">Drop or Click to Upload</p>
                             </>
                         )}
                         <input type="file" accept="image/*" onChange={handlePhoto2Change} className="hidden" />
@@ -143,13 +166,13 @@ const Grid: React.FC = () => {
                     <span className="material-symbols-outlined" style={{ fontVariationSettings: '"FILL" 1' }}>{isLoading ? 'autorenew' : 'auto_awesome'}</span>
                     <span>{isLoading ? 'Merging...' : 'Merge Images'}</span>
                 </button>
-                {message && <p className="text-center font-label-sm mt-2">{message}</p>}
+                {message && <p className="text-center font-label-sm mt-2 text-on-surface font-semibold">{message}</p>}
             </div>
 
             {/* Preview Zone */}
             <div className="lg:col-span-7">
                 <div className="flex flex-col gap-base">
-                    <span className="font-label-sm text-label-sm uppercase text-outline tracking-widest px-xs">Botanical Result</span>
+                    <span className="font-label-sm text-label-sm uppercase text-primary font-bold tracking-widest px-xs">Botanical Result</span>
                     <div className="bg-surface-container-highest rounded-xl p-md shadow-sm border border-outline-variant/10 min-h-125 flex flex-col items-center justify-center relative overflow-hidden">
                         {/* Decorative Leaf Patterns */}
                         <div className="absolute top-4 left-4 opacity-10 pointer-events-none">
@@ -171,8 +194,8 @@ const Grid: React.FC = () => {
                                         src="https://lh3.googleusercontent.com/aida-public/AB6AXuC72FqiZJhfr0fmbG6yx5-8WTg_eXOp5oUc6abtYDbpToFHOjXiK3b4IJ3SFg5L0OAW-GpaAFRoruBUCnJH1dUVCb5u6CNK0c7nHk9CaEQDPgZupGVqh_eaGMjTvBAjPi89J8C0C6R2B33IJiElsxpX1py32mwP3gyUS5tgStBkGmcjsvwlIL9cVvApFWsekuR1ulB3WOqoW6Dx_hzqP3OvirnKT4iQQrMrTGYjlXDn1UFjLT-ij2OT0EnZOjhi6u1vaADzYE2EMnA"
                                     />
                                     <div className="absolute inset-0 flex flex-col items-center justify-center text-center px-lg">
-                                        <span className="material-symbols-outlined text-primary/20 mb-md" style={{ fontSize: "64px" }}>temp_preferences_custom</span>
-                                        <p className="font-headline-sm text-headline-sm text-on-surface-variant/40">Your creation will appear here</p>
+                                        <span className="material-symbols-outlined text-primary/40 mb-md" style={{ fontSize: "64px" }}>temp_preferences_custom</span>
+                                        <p className="font-headline-sm text-headline-sm text-on-surface font-semibold">Your creation will appear here</p>
                                     </div>
                                 </>
                             )}

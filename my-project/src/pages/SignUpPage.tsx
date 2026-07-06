@@ -7,7 +7,6 @@ export default function SignUpPage() {
   const { isLoaded, signUp } = useSignUp();
   const navigate = useNavigate();
   const [emailAddress, setEmailAddress] = useState("");
-  const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [fullName, setFullName] = useState("");
   const [error, setError] = useState("");
@@ -31,7 +30,6 @@ export default function SignUpPage() {
 
       await signUp.create({
         emailAddress,
-        username,
         password,
         firstName,
         lastName,
@@ -99,9 +97,9 @@ export default function SignUpPage() {
               <div className="space-y-2">
                 <label className="font-label-md text-label-md text-on-surface-variant block px-1" htmlFor="name">Full Name</label>
                 <div className="relative group">
-                  <span className="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-outline/40 group-focus-within:text-primary transition-colors text-xl">person</span>
+                  <span className="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-on-surface-variant/60 group-focus-within:text-primary transition-colors text-xl">person</span>
                   <input 
-                    className="w-full pl-12 pr-4 h-14 bg-surface border border-outline-variant/30 rounded-xl focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none transition-all duration-300 placeholder:text-outline/30 font-body-md" 
+                    className="w-full pl-12 pr-4 h-14 bg-surface border border-outline-variant/30 rounded-xl focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none transition-all duration-300 placeholder:text-on-surface-variant/50 font-body-md" 
                     id="name" 
                     placeholder="Evelyn Green" 
                     type="text"
@@ -112,30 +110,15 @@ export default function SignUpPage() {
                 </div>
               </div>
 
-              {/* Username Field */}
-              <div className="space-y-2">
-                <label className="font-label-md text-label-md text-on-surface-variant block px-1" htmlFor="username">Username</label>
-                <div className="relative group">
-                  <span className="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-outline/40 group-focus-within:text-primary transition-colors text-xl">alternate_email</span>
-                  <input 
-                    className="w-full pl-12 pr-4 h-14 bg-surface border border-outline-variant/30 rounded-xl focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none transition-all duration-300 placeholder:text-outline/30 font-body-md" 
-                    id="username" 
-                    placeholder="evelyn_green" 
-                    type="text"
-                    value={username}
-                    onChange={(e) => setUsername(e.target.value)}
-                    required
-                  />
-                </div>
-              </div>
+
 
               {/* Email Field */}
               <div className="space-y-2">
                 <label className="font-label-md text-label-md text-on-surface-variant block px-1" htmlFor="email">Email Address</label>
                 <div className="relative group">
-                  <span className="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-outline/40 group-focus-within:text-primary transition-colors text-xl">mail</span>
+                  <span className="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-on-surface-variant/60 group-focus-within:text-primary transition-colors text-xl">mail</span>
                   <input 
-                    className="w-full pl-12 pr-4 h-14 bg-surface border border-outline-variant/30 rounded-xl focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none transition-all duration-300 placeholder:text-outline/30 font-body-md" 
+                    className="w-full pl-12 pr-4 h-14 bg-surface border border-outline-variant/30 rounded-xl focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none transition-all duration-300 placeholder:text-on-surface-variant/50 font-body-md" 
                     id="email" 
                     placeholder="evelyn@studio.com" 
                     type="email"
@@ -150,9 +133,9 @@ export default function SignUpPage() {
               <div className="space-y-2">
                 <label className="font-label-md text-label-md text-on-surface-variant block px-1" htmlFor="password">Password</label>
                 <div className="relative group">
-                  <span className="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-outline/40 group-focus-within:text-primary transition-colors text-xl">lock</span>
+                  <span className="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-on-surface-variant/60 group-focus-within:text-primary transition-colors text-xl">lock</span>
                   <input 
-                    className="w-full pl-12 pr-12 h-14 bg-surface border border-outline-variant/30 rounded-xl focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none transition-all duration-300 placeholder:text-outline/30 font-body-md" 
+                    className="w-full pl-12 pr-12 h-14 bg-surface border border-outline-variant/30 rounded-xl focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none transition-all duration-300 placeholder:text-on-surface-variant/50 font-body-md" 
                     id="password" 
                     placeholder="••••••••" 
                     type={showPassword ? "text" : "password"}
@@ -161,7 +144,7 @@ export default function SignUpPage() {
                     required
                   />
                   <button 
-                    className="absolute right-4 top-1/2 -translate-y-1/2 text-outline/40 hover:text-primary transition-colors" 
+                    className="absolute right-4 top-1/2 -translate-y-1/2 text-on-surface-variant/60 hover:text-primary transition-colors" 
                     type="button"
                     onClick={() => setShowPassword(!showPassword)}
                   >
@@ -185,6 +168,9 @@ export default function SignUpPage() {
                 I agree to the <a className="text-primary hover:underline font-bold" href="#">Terms</a> and <a className="text-primary hover:underline font-bold" href="#">Privacy</a>.
               </label>
             </div>
+
+            {/* Clerk CAPTCHA Widget Container */}
+            <div id="clerk-captcha" className="my-2"></div>
 
             {/* Primary Action */}
             <button 

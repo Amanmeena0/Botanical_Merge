@@ -124,9 +124,9 @@ export default function VerifyOtpPage() {
               <div className="space-y-2">
                 <label className="font-label-md text-label-md text-on-surface-variant block px-1" htmlFor="code">Verification Code</label>
                 <div className="relative group">
-                  <span className="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-outline/40 group-focus-within:text-primary transition-colors text-xl">key</span>
+                  <span className="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-on-surface-variant/60 group-focus-within:text-primary transition-colors text-xl">key</span>
                   <input 
-                    className="w-full pl-12 pr-4 h-14 bg-surface border border-outline-variant/30 rounded-xl focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none transition-all duration-300 placeholder:text-outline/30 font-body-md tracking-[0.5em] text-center text-xl" 
+                    className="w-full pl-12 pr-4 h-14 bg-surface border border-outline-variant/30 rounded-xl focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none transition-all duration-300 placeholder:text-on-surface-variant/50 font-body-md tracking-[0.5em] text-center text-xl" 
                     id="code" 
                     placeholder="000000" 
                     type="text"
@@ -164,7 +164,7 @@ export default function VerifyOtpPage() {
           </div>
 
           <div className="mt-4 text-center">
-            <Link className="text-outline text-label-sm hover:text-primary transition-colors" to="/signup">
+            <Link className="text-on-surface-variant font-medium text-label-sm hover:text-primary transition-colors" to="/signup">
               Use a different email address
             </Link>
           </div>

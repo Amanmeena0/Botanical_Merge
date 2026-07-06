@@ -87,7 +87,7 @@ export default function SignInPage() {
                 <label className="font-label-md text-label-md text-on-surface-variant block px-1" htmlFor="email">Email Address</label>
                 <div className="relative group">
                   <input 
-                    className="w-full h-14 px-md bg-surface border border-outline-variant/30 rounded-xl focus:ring-2 focus:ring-primary/20 focus:border-primary focus:bg-surface-container-lowest placeholder:text-outline/30 transition-all duration-300 outline-none font-body-md" 
+                    className="w-full h-14 px-md bg-surface border border-outline-variant/30 rounded-xl focus:ring-2 focus:ring-primary/20 focus:border-primary focus:bg-surface-container-lowest placeholder:text-on-surface-variant/50 transition-all duration-300 outline-none font-body-md" 
                     id="email" 
                     placeholder="e.g. clara@botany.com" 
                     type="email"
@@ -95,7 +95,7 @@ export default function SignInPage() {
                     onChange={(e) => setEmailAddress(e.target.value)}
                     required
                   />
-                  <div className="absolute inset-y-0 right-4 flex items-center pointer-events-none text-outline/30 group-focus-within:text-primary/40 transition-colors">
+                  <div className="absolute inset-y-0 right-4 flex items-center pointer-events-none text-on-surface-variant/50 group-focus-within:text-primary/40 transition-colors">
                     <span className="material-symbols-outlined text-xl">mail</span>
                   </div>
                 </div>
@@ -109,7 +109,7 @@ export default function SignInPage() {
                 </div>
                 <div className="relative group">
                   <input 
-                    className="w-full h-14 px-md bg-surface border border-outline-variant/30 rounded-xl focus:ring-2 focus:ring-primary/20 focus:border-primary focus:bg-surface-container-lowest placeholder:text-outline/30 transition-all duration-300 outline-none font-body-md" 
+                    className="w-full h-14 px-md bg-surface border border-outline-variant/30 rounded-xl focus:ring-2 focus:ring-primary/20 focus:border-primary focus:bg-surface-container-lowest placeholder:text-on-surface-variant/50 transition-all duration-300 outline-none font-body-md" 
                     id="password" 
                     placeholder="••••••••" 
                     type="password"
@@ -117,7 +117,7 @@ export default function SignInPage() {
                     onChange={(e) => setPassword(e.target.value)}
                     required
                   />
-                  <div className="absolute inset-y-0 right-4 flex items-center pointer-events-none text-outline/30 group-focus-within:text-primary/40 transition-colors">
+                  <div className="absolute inset-y-0 right-4 flex items-center pointer-events-none text-on-surface-variant/50 group-focus-within:text-primary/40 transition-colors">
                     <span className="material-symbols-outlined text-xl">lock</span>
                   </div>
                 </div>

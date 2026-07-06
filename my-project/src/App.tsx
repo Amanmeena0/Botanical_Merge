@@ -5,11 +5,15 @@ import SignInPage from "@/pages/SignInPage";
 import SignUpPage from "@/pages/SignUpPage";
 import VerifyOtpPage from "@/pages/VerifyOtpPage";
 import DashboardPage from "@/pages/DashboardPage";
+import GalleryPage from "@/pages/GalleryPage";
+import ResourcesPage from "@/pages/ResourcesPage";
 import { SignedIn, SignedOut } from "@clerk/clerk-react";
+import { Analytics } from "@vercel/analytics/react";
 
 function App() {
   return (
-    <Router>
+    <>
+      <Router>
       <Routes>
         {/* Public Routes */}
         <Route path="/" element={<LandingPage />} />
@@ -82,11 +86,27 @@ function App() {
             </>
           } 
         />
+        <Route 
+          path="/gallery" 
+          element={
+            <>
+              <SignedIn>
+                <GalleryPage />
+              </SignedIn>
+              <SignedOut>
+                <Navigate to="/signin" replace />
+              </SignedOut>
+            </>
+          } 
+        />
+        <Route path="/resources" element={<ResourcesPage />} />
 
         {/* Redirect unknown routes to home */}
         <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>
-    </Router>
+      </Router>
+      <Analytics />
+    </>
   );
 }
 

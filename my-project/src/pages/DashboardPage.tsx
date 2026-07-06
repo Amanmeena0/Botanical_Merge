@@ -46,27 +46,33 @@ export default function DashboardPage() {
               </p>
             </Link>
 
-            {/* Placeholder Card 2 */}
-            <div className="bg-surface border border-outline-variant/30 rounded-2xl p-6 opacity-60">
-              <div className="w-12 h-12 rounded-xl bg-secondary/10 flex items-center justify-center mb-4">
+            {/* Gallery Card */}
+            <Link 
+              to="/gallery" 
+              className="group bg-surface hover:bg-secondary/5 border border-outline-variant/30 rounded-2xl p-6 transition-all duration-300 hover:shadow-md"
+            >
+              <div className="w-12 h-12 rounded-xl bg-secondary/10 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
                 <span className="material-symbols-outlined text-secondary">grid_view</span>
               </div>
               <h3 className="font-title-md text-title-md text-on-surface mb-2">Gallery</h3>
               <p className="font-body-md text-on-surface-variant">
-                Browse through your saved creations (Coming Soon).
+                Browse through your saved botanical creation history and merges.
               </p>
-            </div>
+            </Link>
 
-            {/* Placeholder Card 3 */}
-            <div className="bg-surface border border-outline-variant/30 rounded-2xl p-6 opacity-60">
-              <div className="w-12 h-12 rounded-xl bg-tertiary/10 flex items-center justify-center mb-4">
-                <span className="material-symbols-outlined text-tertiary">settings</span>
+            {/* Resources Card */}
+            <Link 
+              to="/resources" 
+              className="group bg-surface hover:bg-tertiary/5 border border-outline-variant/30 rounded-2xl p-6 transition-all duration-300 hover:shadow-md"
+            >
+              <div className="w-12 h-12 rounded-xl bg-tertiary/10 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
+                <span className="material-symbols-outlined text-tertiary">layers</span>
               </div>
-              <h3 className="font-title-md text-title-md text-on-surface mb-2">Settings</h3>
+              <h3 className="font-title-md text-title-md text-on-surface mb-2">Resources</h3>
               <p className="font-body-md text-on-surface-variant">
-                Configure your account preferences and studio defaults.
+                Learn about the neural style transfer model and the system tech stack.
               </p>
-            </div>
+            </Link>
           </div>
         </div>
       </main>
