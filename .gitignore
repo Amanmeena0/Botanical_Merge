@@ -1,7 +1,5 @@
 # Dependencies
 node_modules/
-backend/__pycache__/
-backend/.venv/
 .venv/
 env/
 venv/

@@ -29,29 +29,17 @@ A full-stack neural style transfer application that applies artistic styles from
 
 ## 📁 Project Structure
 
+This repository contains the frontend application:
 ```
-├── backend/                 # Python FastAPI backend
-│   ├── database/           # Database connections and utilities
-│   ├── models/             # Neural network models
-│   ├── src/                # Core processing logic
-│   ├── tools/              # Optimization and utility functions
-│   └── images/             # Content, style, and result images
-│
 └── my-project/             # React + TypeScript frontend
     ├── src/                # React components and application logic
     └── public/             # Static assets
 ```
 
-## 🚀 Quick Start
+> [!NOTE]
+> The backend repository has been separated and is located at `Botanical_Merge_Backend` in the parent directory.
 
-### Backend Setup
-```bash
-cd backend
-python -m venv .venv
-.venv\Scripts\activate  # On Windows
-pip install -r requirements.txt
-uvicorn main:app --reload
-```
+## 🚀 Quick Start
 
 ### Frontend Setup
 ```bash
@@ -60,9 +48,20 @@ npm install
 npm run dev
 ```
 
+### Backend Setup
+To run the backend, navigate to the separate backend repository (`Botanical_Merge_Backend`):
+```bash
+cd ../Botanical_Merge_Backend
+python -m venv .venv
+source .venv/bin/activate   # On macOS/Linux
+# or: .venv\Scripts\activate  # On Windows
+pip install -r requirements.txt
+uvicorn main:app --reload
+```
+
 ## 📝 Environment Variables
 
-Create a `.env` file in the `backend` directory:
+Create a `.env` file in the `Botanical_Merge_Backend` directory:
 ```
 MONGODB_URI=your_mongodb_connection_string
 API_PORT=8000
